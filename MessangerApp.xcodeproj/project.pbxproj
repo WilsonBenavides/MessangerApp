@@ -12,6 +12,11 @@
 		1044BB2520C41FF400634266 /* MessangerApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1044BB2320C41FF400634266 /* MessangerApp.xcdatamodeld */; };
 		1044BB2720C41FF400634266 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1044BB2620C41FF400634266 /* Assets.xcassets */; };
 		1044BB2A20C41FF400634266 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1044BB2820C41FF400634266 /* LaunchScreen.storyboard */; };
+		10F08F5320C4FB0700583D4E /* FriendsControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F08F5220C4FB0700583D4E /* FriendsControllerHelper.swift */; };
+		10F08F5820C50A8300583D4E /* Friend+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F08F5420C50A8300583D4E /* Friend+CoreDataProperties.swift */; };
+		10F08F5920C50A8300583D4E /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F08F5520C50A8300583D4E /* Friend.swift */; };
+		10F08F5A20C50A8300583D4E /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F08F5620C50A8300583D4E /* Message+CoreDataProperties.swift */; };
+		10F08F5B20C50A8300583D4E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F08F5720C50A8300583D4E /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +27,11 @@
 		1044BB2620C41FF400634266 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1044BB2920C41FF400634266 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1044BB2B20C41FF400634266 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		10F08F5220C4FB0700583D4E /* FriendsControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsControllerHelper.swift; sourceTree = "<group>"; };
+		10F08F5420C50A8300583D4E /* Friend+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		10F08F5520C50A8300583D4E /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		10F08F5620C50A8300583D4E /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		10F08F5720C50A8300583D4E /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +70,11 @@
 				1044BB2820C41FF400634266 /* LaunchScreen.storyboard */,
 				1044BB2B20C41FF400634266 /* Info.plist */,
 				1044BB2320C41FF400634266 /* MessangerApp.xcdatamodeld */,
+				10F08F5220C4FB0700583D4E /* FriendsControllerHelper.swift */,
+				10F08F5420C50A8300583D4E /* Friend+CoreDataProperties.swift */,
+				10F08F5520C50A8300583D4E /* Friend.swift */,
+				10F08F5620C50A8300583D4E /* Message+CoreDataProperties.swift */,
+				10F08F5720C50A8300583D4E /* Message.swift */,
 			);
 			path = MessangerApp;
 			sourceTree = "<group>";
@@ -137,7 +152,12 @@
 			files = (
 				1044BB2520C41FF400634266 /* MessangerApp.xcdatamodeld in Sources */,
 				1044BB1F20C41FF400634266 /* ViewController.swift in Sources */,
+				10F08F5820C50A8300583D4E /* Friend+CoreDataProperties.swift in Sources */,
+				10F08F5920C50A8300583D4E /* Friend.swift in Sources */,
+				10F08F5A20C50A8300583D4E /* Message+CoreDataProperties.swift in Sources */,
+				10F08F5B20C50A8300583D4E /* Message.swift in Sources */,
 				1044BB1D20C41FF400634266 /* AppDelegate.swift in Sources */,
+				10F08F5320C4FB0700583D4E /* FriendsControllerHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +303,7 @@
 				1044BB3020C41FF400634266 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
