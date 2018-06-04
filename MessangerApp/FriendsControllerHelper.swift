@@ -8,26 +8,41 @@
 
 import UIKit
 
-
-//class Friend: NSObject {
-//    
-//    var name: String?
-//    var profileImageName: String?
-//}
-//
-//class Message: NSObject {
-//    
-//    var text: String?
-//    var date: NSDate?
-//    
-//    var friend: Friend?
-//}
-
 import CoreData
 
-extension FriendsController {    
+extension FriendsController {
+    
+    func clearData() {
+        let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        
+        if let context = delegate?.managedObjectContext {
+            
+            
+            do {
+                
+                let entityNames = ["Friend", "Message"]
+                
+                for entityName in entityNames {
+                    let fetchRequest = NSFetchRequest(entityName: entityName)
+                    
+                    let objects = try(context.executeFetchRequest(fetchRequest)) as? [NSManagedObject]
+                    
+                    for message in objects! {
+                        context.deleteObject(message)
+                    }
+                }
+                
+                try(context.save())
+                
+            }catch let err {
+                print(err)
+            }
+        }
+    }
     
     func setupData() {
+        
+        clearData()
         
         let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
         
@@ -56,7 +71,6 @@ extension FriendsController {
             } catch let err {
                 print(err)
             }
-            //messages = [message, messageSteve]
         }
         
         loadData()
