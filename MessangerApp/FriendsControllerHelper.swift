@@ -61,9 +61,9 @@ extension FriendsController {
             steve.name = "Steve Jobs"
             steve.profileImageName = "steve_profile"
             
-            createMessageWithText("Good morning...", friend: steve, minutesAgo: 2, context: context)
-            createMessageWithText("Hello, how are you?", friend: steve, minutesAgo: 1, context: context)
-            createMessageWithText("Are you interested in buying an Apple device?", friend: steve, minutesAgo: 0, context: context)
+            createMessageWithText("Good morning...", friend: steve, minutesAgo: 3, context: context)
+            createMessageWithText("Hello, how are you?", friend: steve, minutesAgo: 2, context: context)
+            createMessageWithText("Are you interested in buying an Apple device?", friend: steve, minutesAgo: 1, context: context)
             
             let donald = NSEntityDescription.insertNewObjectForEntityForName("Friend", inManagedObjectContext: context) as! Friend
             donald.name = "Donald Trump"
@@ -115,6 +115,7 @@ extension FriendsController {
                     }
                 }
                 
+                messages = messages?.sort({$0.date!.compare($1.date!) == .OrderedDescending})
             }
         }
     }
