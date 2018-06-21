@@ -17,7 +17,6 @@ extension FriendsController {
         
         if let context = delegate?.managedObjectContext {
             
-            
             do {
                 
                 let entityNames = ["Friend", "Message"]
@@ -27,16 +26,18 @@ extension FriendsController {
                     
                     let objects = try(context.executeFetchRequest(fetchRequest)) as? [NSManagedObject]
                     
-                    for message in objects! {
-                        context.deleteObject(message)
+                    for object in objects! {
+                        context.deleteObject(object)
                     }
                 }
                 
                 try(context.save())
                 
-            }catch let err {
+                
+            } catch let err {
                 print(err)
             }
+            
         }
     }
     
@@ -47,21 +48,21 @@ extension FriendsController {
         let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
         
         if let context = delegate?.managedObjectContext {
-            let mark = NSEntityDescription.insertNewObjectForEntityForName("Friend", inManagedObjectContext: context) as! Friend
             
+            let mark = NSEntityDescription.insertNewObjectForEntityForName("Friend", inManagedObjectContext: context) as! Friend
             mark.name = "Mark Zuckerberg"
             mark.profileImageName = "zuckprofile"
             
             let message = NSEntityDescription.insertNewObjectForEntityForName("Message", inManagedObjectContext: context) as! Message
             message.friend = mark
-            message.text = "Hello, my name is Mark, Nice to meet you"
+            message.text = "Hello, my name is Mark. Nice to meet you..."
             message.date = NSDate()
             
             let steve = NSEntityDescription.insertNewObjectForEntityForName("Friend", inManagedObjectContext: context) as! Friend
             steve.name = "Steve Jobs"
             steve.profileImageName = "steve_profile"
             
-            createMessageWithText("Good morning...", friend: steve, minutesAgo: 3, context: context)
+            createMessageWithText("Good morning..", friend: steve, minutesAgo: 3, context: context)
             createMessageWithText("Hello, how are you?", friend: steve, minutesAgo: 2, context: context)
             createMessageWithText("Are you interested in buying an Apple device?", friend: steve, minutesAgo: 1, context: context)
             
@@ -79,6 +80,7 @@ extension FriendsController {
         }
         
         loadData()
+        
     }
     
     private func createMessageWithText(text: String, friend: Friend, minutesAgo: Double, context: NSManagedObjectContext) {
@@ -89,7 +91,6 @@ extension FriendsController {
     }
     
     func loadData() {
-        
         let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
         
         if let context = delegate?.managedObjectContext {
@@ -110,36 +111,35 @@ extension FriendsController {
                         
                         let fetchedMessages = try(context.executeFetchRequest(fetchRequest)) as? [Message]
                         messages?.appendContentsOf(fetchedMessages!)
-                    }catch let err {
+                        
+                    } catch let err {
                         print(err)
                     }
                 }
                 
                 messages = messages?.sort({$0.date!.compare($1.date!) == .OrderedDescending})
+                
             }
         }
     }
     
     private func fetchFriends() -> [Friend]? {
         let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
-        
         if let context = delegate?.managedObjectContext {
             
             let request = NSFetchRequest(entityName: "Friend")
             
             do {
+                
                 return try context.executeFetchRequest(request) as? [Friend]
+                
             } catch let err {
                 print(err)
             }
+            
         }
+        
         return nil
     }
+    
 }
-
-
-
-
-
-
-

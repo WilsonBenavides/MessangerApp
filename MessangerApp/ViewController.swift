@@ -10,15 +10,14 @@ import UIKit
 
 class FriendsController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    private let cellId = "CellId"
+    private let cellId = "cellId"
     
-    var messages: [Message]?   
-
+    var messages: [Message]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("testing print console...")
-        
         navigationItem.title = "Recent"
+        collectionView?.backgroundColor = UIColor.redColor()
         
         collectionView?.backgroundColor = UIColor.whiteColor()
         collectionView?.alwaysBounceVertical = true
@@ -36,7 +35,7 @@ class FriendsController: UICollectionViewController, UICollectionViewDelegateFlo
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell =  collectionView.dequeueReusableCellWithReuseIdentifier(cellId, forIndexPath: indexPath) as! MessageCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellId, forIndexPath: indexPath) as! MessageCell
         
         if let message = messages?[indexPath.item] {
             cell.message = message
@@ -44,7 +43,7 @@ class FriendsController: UICollectionViewController, UICollectionViewDelegateFlo
         
         return cell
     }
-    	
+    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CGSizeMake(view.frame.width, 100)
     }
@@ -64,8 +63,8 @@ class MessageCell: BaseCell {
             nameLabel.text = message?.friend?.name
             
             if let profileImageName = message?.friend?.profileImageName {
-                profileImageView.image = UIImage(named: profileImageName)
-                hasReadImageView.image = UIImage(named: profileImageName)
+                profileImageView.image = UIImage(named: profileImageName);
+                hasReadImageView.image = UIImage(named: profileImageName);
             }
             
             messageLabel.text = message?.text
@@ -77,6 +76,7 @@ class MessageCell: BaseCell {
                 
                 timeLabel.text = dateFormatter.stringFromDate(date)
             }
+            
         }
     }
     
@@ -95,7 +95,7 @@ class MessageCell: BaseCell {
     }()
     
     let nameLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "Mark Zuckerberg"
         label.font = UIFont.systemFontOfSize(18)
         return label
@@ -103,7 +103,7 @@ class MessageCell: BaseCell {
     
     let messageLabel: UILabel = {
         let label = UILabel()
-        label.text = "Your friends message and something else..."
+        label.text = "Your friend's message and something else..."
         label.textColor = UIColor.darkGrayColor()
         label.font = UIFont.systemFontOfSize(14)
         return label
@@ -111,7 +111,7 @@ class MessageCell: BaseCell {
     
     let timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "12.05 pm"
+        label.text = "12:05 pm"
         label.font = UIFont.systemFontOfSize(16)
         label.textAlignment = .Right
         return label
@@ -136,7 +136,7 @@ class MessageCell: BaseCell {
         hasReadImageView.image = UIImage(named: "zuckprofile")
         
         addConstraintsWithFormat("H:|-12-[v0(68)]", views: profileImageView)
-        addConstraintsWithFormat("V:|[v0(68)]", views: profileImageView)
+        addConstraintsWithFormat("V:[v0(68)]", views: profileImageView)
         
         addConstraint(NSLayoutConstraint(item: profileImageView, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: 0))
         
@@ -150,7 +150,6 @@ class MessageCell: BaseCell {
         
         addConstraintsWithFormat("H:|-90-[v0]|", views: containerView)
         addConstraintsWithFormat("V:[v0(50)]", views: containerView)
-        
         addConstraint(NSLayoutConstraint(item: containerView, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: 0))
         
         containerView.addSubview(nameLabel)
@@ -168,11 +167,11 @@ class MessageCell: BaseCell {
         
         containerView.addConstraintsWithFormat("V:[v0(20)]|", views: hasReadImageView)
     }
+    
 }
 
-
 extension UIView {
-
+    
     func addConstraintsWithFormat(format: String, views: UIView...) {
         
         var viewsDictionary = [String: UIView]()
@@ -184,6 +183,7 @@ extension UIView {
         
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
     }
+    
 }
 
 class BaseCell: UICollectionViewCell {
@@ -197,7 +197,5 @@ class BaseCell: UICollectionViewCell {
     }
     
     func setupViews() {
-        backgroundColor = UIColor.blueColor()
     }
 }
-
