@@ -2,7 +2,7 @@
 //  Message+CoreDataProperties.swift
 //  MessangerApp
 //
-//  Created by willix on 3/06/18.
+//  Created by willix on 22/06/18.
 //  Copyright © 2018 willix. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,8 +14,9 @@ import CoreData
 
 extension Message {
 
-    @NSManaged var text: String?
     @NSManaged var date: NSDate?
+    @NSManaged var text: String?
+    @NSManaged var isSender: NSNumber?
     @NSManaged var friend: Friend?
 
 }
