@@ -55,11 +55,12 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
             if !message.isSender!.boolValue {
                 cell.messageTextView.frame = CGRectMake(48 + 8, 0, estimatedFrame.width + 16, estimatedFrame.height + 20)
                 
-                cell.textBubbleView.frame = CGRectMake(48, 0, estimatedFrame.width + 16 + 8, estimatedFrame.height + 20)
+                cell.textBubbleView.frame = CGRectMake(48 - 10 - 4, 0, estimatedFrame.width + 16 + 8 + 16, estimatedFrame.height + 20 + 6)
                 
                 cell.profileImageView.hidden = false
                 
-                cell.textBubbleView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+                //cell.textBubbleView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+                cell.bubbleImageView.tintColor = UIColor(white: 0.95, alpha: 1)
                 cell.messageTextView.textColor = UIColor.blackColor()
             } else {
                 //outgoing sending message
@@ -69,7 +70,8 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
                 
                 cell.profileImageView.hidden = true
                 
-                cell.textBubbleView.backgroundColor = UIColor(red: 0, green: 137/255, blue: 249/255, alpha: 1)
+                //cell.textBubbleView.backgroundColor = UIColor(red: 0, green: 137/255, blue: 249/255, alpha: 1)
+                cell.bubbleImageView.tintColor = UIColor(red: 0, green: 137/255, blue: 249/255, alpha: 1)
                 cell.messageTextView.textColor = UIColor.whiteColor()
             }
         }
@@ -108,7 +110,7 @@ class ChatLogMessageCell: BaseCell {
     
     let textBubbleView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        //view.backgroundColor = UIColor(white: 0.95, alpha: 1)
         view.layer.cornerRadius = 15
         view.layer.masksToBounds = true
         return view
@@ -124,7 +126,8 @@ class ChatLogMessageCell: BaseCell {
     
     let bubbleImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "bubble_gray")
+        imageView.image = UIImage(named: "bubble_gray")!.resizableImageWithCapInsets(UIEdgeInsetsMake(22, 26, 22, 26)).imageWithRenderingMode(.AlwaysTemplate)
+        imageView.tintColor = UIColor(white: 0.90, alpha: 1)
         return imageView
     }()
     
