@@ -20,11 +20,6 @@ class CustomTabBarController: UITabBarController {
         recentMessagesNavController.tabBarItem.title = "Recent"
         recentMessagesNavController.tabBarItem.image = UIImage(named: "recent")
         
-//        let viewController = UIViewController()
-//        let navController = UINavigationController(rootViewController: viewController)
-//        navController.tabBarItem.title = "Calls"
-//        navController.tabBarItem.image = UIImage(named: "calls")
-        
         viewControllers = [recentMessagesNavController, createDummyNavControllerWithTitle("Calls", imageName: "calls"), createDummyNavControllerWithTitle("Groups", imageName: "groups"), createDummyNavControllerWithTitle("People", imageName: "people"), createDummyNavControllerWithTitle("Settings", imageName: "settings")]
     }
     
@@ -35,14 +30,5 @@ class CustomTabBarController: UITabBarController {
         navController.tabBarItem.image = UIImage(named: imageName)
         return navController
     }
+    
 }
-
-
-
-
-
-
-
-
-
-
