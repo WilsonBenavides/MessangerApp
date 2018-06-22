@@ -48,6 +48,15 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        if let messageText = messages?[indexPath.item].text {
+            let size = CGSizeMake(view.frame.width, 1000)
+            let options = NSStringDrawingOptions.UsesFontLeading.union(.UsesLineFragmentOrigin)
+            let estimatedFrame = NSString(string: messageText).boundingRectWithSize(size, options: options, attributes: [NSFontAttributeName: UIFont.systemFontOfSize(18)], context: nil)
+            
+            return CGSizeMake(view.frame.width, estimatedFrame.height + 20)
+        }
+        
         return CGSizeMake(view.frame.width, 100)
     }
     
@@ -57,13 +66,16 @@ class ChatLogMessageCell: BaseCell {
     
     let messageTextView: UITextView = {
         let textView = UITextView()
-        textView.font = UIFont.systemFontOfSize(16)
+        textView.font = UIFont.systemFontOfSize(18)
         textView.text = "Sample message"
+        textView.backgroundColor = UIColor.clearColor()
         return textView
     }()
     
     override func setupViews() {
         super.setupViews()
+        
+        backgroundColor = UIColor.lightGrayColor()
         
         addSubview(messageTextView)
         addConstraintsWithFormat("H:|[v0]|", views: messageTextView)
