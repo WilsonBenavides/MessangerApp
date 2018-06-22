@@ -58,6 +58,16 @@ class FriendsController: UICollectionViewController, UICollectionViewDelegateFlo
 
 class MessageCell: BaseCell {
     
+    override var highlighted: Bool {
+        didSet {
+            backgroundColor = highlighted ? UIColor(red: 0, green: 134/255, blue: 249/255, alpha:1) : UIColor.whiteColor()
+            nameLabel.textColor = highlighted ? UIColor.whiteColor() : UIColor.blackColor()
+            timeLabel.textColor = highlighted ? UIColor.whiteColor() : UIColor.blackColor()
+            messageLabel.textColor = highlighted ? UIColor.whiteColor() : UIColor.blackColor()
+            print(highlighted)
+        }
+    }
+    
     var message: Message? {
         didSet {
             nameLabel.text = message?.friend?.name
