@@ -58,6 +58,9 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
                 cell.textBubbleView.frame = CGRectMake(48, 0, estimatedFrame.width + 16 + 8, estimatedFrame.height + 20)
                 
                 cell.profileImageView.hidden = false
+                
+                cell.textBubbleView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+                cell.messageTextView.textColor = UIColor.blackColor()
             } else {
                 //outgoing sending message
                 cell.messageTextView.frame = CGRectMake(view.frame.width - estimatedFrame.width - 16 - 16, 0, estimatedFrame.width + 16, estimatedFrame.height + 20)
@@ -65,6 +68,9 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
                 cell.textBubbleView.frame = CGRectMake(view.frame.width - estimatedFrame.width - 16 - 8 - 16, 0, estimatedFrame.width + 16 + 8, estimatedFrame.height + 20)
                 
                 cell.profileImageView.hidden = true
+                
+                cell.textBubbleView.backgroundColor = UIColor(red: 0, green: 137/255, blue: 249/255, alpha: 1)
+                cell.messageTextView.textColor = UIColor.whiteColor()
             }
         }
         
@@ -116,6 +122,12 @@ class ChatLogMessageCell: BaseCell {
         return imageView
     }()
     
+    let bubbleImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "bubble_gray")
+        return imageView
+    }()
+    
     override func setupViews() {
         super.setupViews()
         
@@ -126,6 +138,10 @@ class ChatLogMessageCell: BaseCell {
         addConstraintsWithFormat("H:|-8-[v0(30)]", views: profileImageView)
         addConstraintsWithFormat("V:[v0(30)]|", views: profileImageView)
         profileImageView.backgroundColor = UIColor.redColor()
+        
+        textBubbleView.addSubview(bubbleImageView)
+        textBubbleView.addConstraintsWithFormat("H:|[v0]|", views: bubbleImageView)
+        textBubbleView.addConstraintsWithFormat("V:|[v0]|", views: bubbleImageView)
     }
     
 }
