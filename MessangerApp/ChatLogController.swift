@@ -98,12 +98,20 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
     }
     
     private func setupInputComponents() {
+        let topBorderView = UIView()
+        topBorderView.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
+        
         messageInputContainerView.addSubview(inputTextField)
         messageInputContainerView.addSubview(sendButton)
+        messageInputContainerView.addSubview(topBorderView)
         
         messageInputContainerView.addConstraintsWithFormat("H:|-8-[v0][v1(60)]|", views: inputTextField, sendButton)
+        
         messageInputContainerView.addConstraintsWithFormat("V:|[v0]|", views: inputTextField)
         messageInputContainerView.addConstraintsWithFormat("V:|[v0]|", views: sendButton)
+        
+        messageInputContainerView.addConstraintsWithFormat("H:|[v0]|", views: topBorderView)
+        messageInputContainerView.addConstraintsWithFormat("V:|[v0(0.5)]", views: topBorderView)
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
