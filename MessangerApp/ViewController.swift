@@ -14,6 +14,10 @@ class FriendsController: UICollectionViewController, UICollectionViewDelegateFlo
     
     var messages: [Message]?
     
+    override func viewWillAppear(animated: Bool) {
+        tabBarController?.tabBar.hidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Recent"

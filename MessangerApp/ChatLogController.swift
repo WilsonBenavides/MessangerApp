@@ -24,8 +24,12 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
     
     var messages: [Message]?
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tabBarController?.tabBar.hidden = true
         
         collectionView?.backgroundColor = UIColor.whiteColor()
         
