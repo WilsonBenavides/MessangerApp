@@ -24,7 +24,17 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
     
     var messages: [Message]?
     
+    let messageInputContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.lightGrayColor()
+        return view
+    }()
     
+    let inputTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Enter message..."
+        return textField
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +44,29 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
         collectionView?.backgroundColor = UIColor.whiteColor()
         
         collectionView?.registerClass(ChatLogMessageCell.self, forCellWithReuseIdentifier: cellId)
+        
+        view.addSubview(messageInputContainerView)
+        view.addConstraintsWithFormat("H:|-8-[v0]|", views: messageInputContainerView)
+        view.addConstraintsWithFormat("V:[v0(48)]|", views: messageInputContainerView)
+        
+        setupInputComponents()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleKeyboardNotification), name: UIKeyboardWillShowNotification, object: nil)
+    }
+    
+    func handleKeyboardNotification(notification: NSNotification) {
+        
+        if let userInfo = notification.userInfo {
+            
+            let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue()
+            print(keyboardFrame)
+        }
+    }
+    
+    private func setupInputComponents() {
+        messageInputContainerView.addSubview(inputTextField)
+        messageInputContainerView.addConstraintsWithFormat("H:|[v0]|", views: inputTextField)
+        messageInputContainerView.addConstraintsWithFormat("V:|[v0]|", views: inputTextField)
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
