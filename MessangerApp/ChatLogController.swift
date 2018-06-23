@@ -36,6 +36,8 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
         return textField
     }()
     
+    var bottomConstraint: NSLayoutConstraint?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,7 +49,10 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
         
         view.addSubview(messageInputContainerView)
         view.addConstraintsWithFormat("H:|-8-[v0]|", views: messageInputContainerView)
-        view.addConstraintsWithFormat("V:[v0(48)]|", views: messageInputContainerView)
+        view.addConstraintsWithFormat("V:[v0(48)]", views: messageInputContainerView)
+        
+        bottomConstraint = NSLayoutConstraint(item: messageInputContainerView, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: -100)
+        view.addConstraint(bottomConstraint!)
         
         setupInputComponents()
         
