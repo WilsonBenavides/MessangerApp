@@ -26,7 +26,7 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
     
     let messageInputContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.lightGrayColor()
+        view.backgroundColor = UIColor.whiteColor()
         return view
     }()
     
@@ -34,6 +34,15 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
         let textField = UITextField()
         textField.placeholder = "Enter message..."
         return textField
+    }()
+    
+    let sendButton: UIButton = {
+        let button = UIButton(type: .System)
+        button.setTitle("Send", forState: .Normal)
+        let titleColor = UIColor(red: 0, green: 137/255, blue: 249/255, alpha: 1)
+        button.setTitleColor(titleColor, forState: .Normal)
+        button.titleLabel?.font = UIFont.boldSystemFontOfSize(16)
+        return button
     }()
     
     var bottomConstraint: NSLayoutConstraint?
@@ -48,15 +57,17 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
         collectionView?.registerClass(ChatLogMessageCell.self, forCellWithReuseIdentifier: cellId)
         
         view.addSubview(messageInputContainerView)
-        view.addConstraintsWithFormat("H:|-8-[v0]|", views: messageInputContainerView)
+        view.addConstraintsWithFormat("H:|[v0]|", views: messageInputContainerView)
         view.addConstraintsWithFormat("V:[v0(48)]", views: messageInputContainerView)
         
-        bottomConstraint = NSLayoutConstraint(item: messageInputContainerView, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: -100)
+        bottomConstraint = NSLayoutConstraint(item: messageInputContainerView, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: 0)
         view.addConstraint(bottomConstraint!)
         
         setupInputComponents()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleKeyboardNotification), name: UIKeyboardWillShowNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleKeyboardNotification), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     func handleKeyboardNotification(notification: NSNotification) {
@@ -64,14 +75,35 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
         if let userInfo = notification.userInfo {
             
             let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue()
+            
+            let isKeyboardShowing = notification.name == UIKeyboardWillShowNotification
+            
+            bottomConstraint?.constant = isKeyboardShowing ? -keyboardFrame!.height : 0
+            
+            UIView.animateWithDuration(0, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { 
+                
+                self.view.layoutIfNeeded()
+                
+                }, completion: { (completed) in
+                    
+                    
+            })
+            
             print(keyboardFrame)
         }
     }
     
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        inputTextField.endEditing(true)
+    }
+    
     private func setupInputComponents() {
         messageInputContainerView.addSubview(inputTextField)
-        messageInputContainerView.addConstraintsWithFormat("H:|[v0]|", views: inputTextField)
+        messageInputContainerView.addSubview(sendButton)
+        
+        messageInputContainerView.addConstraintsWithFormat("H:|-8-[v0][v1(60)]|", views: inputTextField, sendButton)
         messageInputContainerView.addConstraintsWithFormat("V:|[v0]|", views: inputTextField)
+        messageInputContainerView.addConstraintsWithFormat("V:|[v0]|", views: sendButton)
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
