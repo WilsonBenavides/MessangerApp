@@ -5,7 +5,6 @@
 //  Created by willix on 3/06/18.
 //  Copyright © 2018 willix. All rights reserved.
 //
-
 import UIKit
 
 class FriendsController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
@@ -15,6 +14,8 @@ class FriendsController: UICollectionViewController, UICollectionViewDelegateFlo
     var messages: [Message]?
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         tabBarController?.tabBar.hidden = false
     }
     

@@ -75,21 +75,24 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
         if let userInfo = notification.userInfo {
             
             let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue()
+            print(keyboardFrame)
             
             let isKeyboardShowing = notification.name == UIKeyboardWillShowNotification
             
             bottomConstraint?.constant = isKeyboardShowing ? -keyboardFrame!.height : 0
             
-            UIView.animateWithDuration(0, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { 
+            UIView.animateWithDuration(0, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
                 
                 self.view.layoutIfNeeded()
                 
                 }, completion: { (completed) in
                     
+                    if isKeyboardShowing {
+                        let indexPath = NSIndexPath(forItem: self.messages!.count - 1, inSection: 0)
+                        self.collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
+                    }
                     
             })
-            
-            print(keyboardFrame)
         }
     }
     
