@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class FriendsController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class FriendsController: UICollectionViewController, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate {
     
     private let cellId = "cellId"
     
@@ -17,10 +17,18 @@ class FriendsController: UICollectionViewController, UICollectionViewDelegateFlo
     lazy var fetchedResultsConstroller: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest(entityName: "Friend")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lastMessage.date", ascending: false)]
+        fetchRequest.predicate = NSPredicate(format: "lastMessage != nil")
         let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        frc.delegate = self
         return frc
     }()
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        if type == .Insert {
+            collectionView?.insertItemsAtIndexPaths([newIndexPath!])
+        }
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -45,6 +53,18 @@ class FriendsController: UICollectionViewController, UICollectionViewDelegateFlo
         } catch let err {
             print(err)
         }
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add Mark", style: .Plain, target: self, action: #selector(addMark))
+    }
+    
+    func addMark() {
+        let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        let mark = NSEntityDescription.insertNewObjectForEntityForName("Friend", inManagedObjectContext: context) as! Friend
+        mark.name = "Mark Zuckerberg"
+        mark.profileImageName = "zuckprofile"
+        
+        FriendsController.createMessageWithText("Hello, my name is Mark. Nice to meet you...", friend: mark, minutesAgo: 0, context: context)
+
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -48,17 +48,7 @@ extension FriendsController {
         let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
         
         if let context = delegate?.managedObjectContext {
-            
-            let mark = NSEntityDescription.insertNewObjectForEntityForName("Friend", inManagedObjectContext: context) as! Friend
-            mark.name = "Mark Zuckerberg"
-            mark.profileImageName = "zuckprofile"
-            
-            let message = NSEntityDescription.insertNewObjectForEntityForName("Message", inManagedObjectContext: context) as! Message
-            message.friend = mark
-            message.text = "Hello, my name is Mark. Nice to meet you..."
-            message.date = NSDate()
-            mark.lastMessage = message
-            
+                                    
             createSteveMessagesWithContext(context)
             
             let donald = NSEntityDescription.insertNewObjectForEntityForName("Friend", inManagedObjectContext: context) as! Friend
