@@ -111,6 +111,8 @@ extension FriendsController {
         message.text = text
         message.date = NSDate().dateByAddingTimeInterval(-minutesAgo * 60)
         message.isSender = NSNumber(bool: isSender)
+        
+        friend.lastMessage = message
         return message
     }
     
