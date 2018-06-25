@@ -57,6 +57,7 @@ extension FriendsController {
             message.friend = mark
             message.text = "Hello, my name is Mark. Nice to meet you..."
             message.date = NSDate()
+            mark.lastMessage = message
             
             createSteveMessagesWithContext(context)
             
