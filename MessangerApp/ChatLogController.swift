@@ -63,16 +63,43 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
             let insertionIndexPath = NSIndexPath(forItem: item, inSection: 0)
             
             collectionView?.insertItemsAtIndexPaths([insertionIndexPath])
+            collectionView?.scrollToItemAtIndexPath(insertionIndexPath, atScrollPosition: .Bottom, animated: true)
+            inputTextField.text = nil
             
-        }catch let err {
+        } catch let err {
             print(err)
         }
     }
     
     var bottomConstraint: NSLayoutConstraint?
     
+    func simulate() {
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context = delegate.managedObjectContext
+        let message = FriendsController.createMessageWithText("Here's a text message that was sent a few minutes ago...", friend: friend!, minutesAgo: 1, context: context)
+        
+        do {
+            try context.save()
+            
+            messages?.append(message)
+            
+            messages = messages?.sort({$0.date!.compare($1.date!) == .OrderedAscending})
+            
+            if let item = messages?.indexOf(message) {
+                let receivingIndexPath = NSIndexPath(forItem: item, inSection: 0)
+                collectionView?.insertItemsAtIndexPaths([receivingIndexPath])
+            }
+            
+        } catch let err {
+            print(err)
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simulate", style: .Plain, target: self, action: #selector(simulate))
         
         tabBarController?.tabBar.hidden = true
         
