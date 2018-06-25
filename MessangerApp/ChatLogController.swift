@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
@@ -96,8 +97,25 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
         
     }
     
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+       let fetchRequest = NSFetchRequest(entityName: "Message")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+        fetchRequest.predicate = NSPredicate(format: "friend.name = %@", self.friend!.name!)
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context = delegate.managedObjectContext
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        return frc
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        do {
+            try fetchedResultsController.performFetch()
+            print(fetchedResultsController.sections?[0].numberOfObjects)
+        } catch let err {
+            print(err)
+        }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simulate", style: .Plain, target: self, action: #selector(simulate))
         
@@ -169,7 +187,7 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let count = messages?.count {
+        if let count = fetchedResultsController.sections?[0].numberOfObjects {
             return count
         }
         return 0
@@ -178,9 +196,11 @@ class ChatLogController: UICollectionViewController, UICollectionViewDelegateFlo
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellId, forIndexPath: indexPath) as! ChatLogMessageCell
         
-        cell.messageTextView.text = messages?[indexPath.item].text
+        let message = fetchedResultsController.objectAtIndexPath(indexPath) as! Message
         
-        if let message = messages?[indexPath.item], messageText = message.text, profileImageName = message.friend?.profileImageName {
+        cell.messageTextView.text = message.text
+        
+        if let messageText = message.text, profileImageName = message.friend?.profileImageName {
             
             cell.profileImageView.image = UIImage(named: profileImageName)
             
