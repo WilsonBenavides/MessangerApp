@@ -2,7 +2,7 @@
 //  Friend+CoreDataProperties.swift
 //  MessangerApp
 //
-//  Created by willix on 3/06/18.
+//  Created by willix on 25/06/18.
 //  Copyright © 2018 willix. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -17,5 +17,6 @@ extension Friend {
     @NSManaged var name: String?
     @NSManaged var profileImageName: String?
     @NSManaged var messages: NSSet?
+    @NSManaged var lastMessage: Message?
 
 }

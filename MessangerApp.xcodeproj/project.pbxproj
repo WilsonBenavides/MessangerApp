@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1044BB1D20C41FF400634266 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1044BB1C20C41FF400634266 /* AppDelegate.swift */; };
-		1044BB1F20C41FF400634266 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1044BB1E20C41FF400634266 /* ViewController.swift */; };
+		1044BB1F20C41FF400634266 /* FriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1044BB1E20C41FF400634266 /* FriendsController.swift */; };
 		1044BB2520C41FF400634266 /* MessangerApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1044BB2320C41FF400634266 /* MessangerApp.xcdatamodeld */; };
 		1044BB2720C41FF400634266 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1044BB2620C41FF400634266 /* Assets.xcassets */; };
 		1044BB2A20C41FF400634266 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1044BB2820C41FF400634266 /* LaunchScreen.storyboard */; };
@@ -24,7 +24,7 @@
 /* Begin PBXFileReference section */
 		1044BB1920C41FF400634266 /* MessangerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MessangerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1044BB1C20C41FF400634266 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1044BB1E20C41FF400634266 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1044BB1E20C41FF400634266 /* FriendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsController.swift; sourceTree = "<group>"; };
 		1044BB2420C41FF400634266 /* MessangerApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MessangerApp.xcdatamodel; sourceTree = "<group>"; };
 		1044BB2620C41FF400634266 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1044BB2920C41FF400634266 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				1044BB1C20C41FF400634266 /* AppDelegate.swift */,
-				1044BB1E20C41FF400634266 /* ViewController.swift */,
+				1044BB1E20C41FF400634266 /* FriendsController.swift */,
 				1044BB2620C41FF400634266 /* Assets.xcassets */,
 				1044BB2820C41FF400634266 /* LaunchScreen.storyboard */,
 				1044BB2B20C41FF400634266 /* Info.plist */,
@@ -159,7 +159,7 @@
 				10CF4B3E20DBFD3D003048D7 /* ChatLogController.swift in Sources */,
 				1044BB2520C41FF400634266 /* MessangerApp.xcdatamodeld in Sources */,
 				10DFDED320DCB2640097F2A6 /* CustomTabBarController.swift in Sources */,
-				1044BB1F20C41FF400634266 /* ViewController.swift in Sources */,
+				1044BB1F20C41FF400634266 /* FriendsController.swift in Sources */,
 				10F08F5820C50A8300583D4E /* Friend+CoreDataProperties.swift in Sources */,
 				10F08F5920C50A8300583D4E /* Friend.swift in Sources */,
 				10F08F5A20C50A8300583D4E /* Message+CoreDataProperties.swift in Sources */,
